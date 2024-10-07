@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login Form</title>
+  <style>
+    body {
+      background-image: url('https://t4.ftcdn.net/jpg/02/55/77/03/360_F_255770374_rbmJO9gkkIhMBcyVPc3iW016BCLDvcWc.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+    }
+    .nav-bar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+    .nav-button {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+    .nav-button:hover {
+      color: #ca6959;
+    }
+    .center {
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .txt_field {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .txt_field input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid #adadad;
+      background: none;
+      outline: none;
+      color: #ca6959;
+      font-size: 16px;
+    }
+    .txt_field label {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      color: white;
+      transform: translateY(-50%);
+      font-size: 16px;
+      pointer-events: none;
+      transition: .5s;
+    }
+    .txt_field span::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: white;
+      transition: .5s;
+    }
+    .txt_field input:focus ~ label,
+    .txt_field input:valid ~ label {
+      top: -5px;
+      color: black;
+    }
+    .txt_field input:focus ~ span::before,
+    .txt_field input:valid ~ span::before {
+      width: 100%;
+    }
+    .pass {
+      margin-bottom: 30px;
+      cursor: pointer;
+    }
+    .login-type {
+      margin-bottom: 30px;
+    }
+    .login-type input[type="radio"] {
+      margin: 0 10px 0 0;
+      accent-color: black;
+    }
+    .login-type label {
+      margin-right: 20px;
+      color: #ca6959;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #ca6959;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background .3s;
+      color: #fff;
+    }
+    input[type="submit"]:hover {
+      background: #b2584e;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-bar">
+    <a href="./Home.html" class="nav-button">Home</a>
+    <a href="./about.html" class="nav-button">About</a>
+    <a href="./contact.html" class="nav-button">Contact</a>
+    <a href="./Main.html" class="nav-button">Logout</a>
+  </div>
+
+  <div class="center">
+    <h1>Login</h1>
+    <form method="post" id="login-form">
+      <div class="login-type">
+        <input type="radio" id="admin-login" name="login-type" value="admin" checked>
+        <label for="admin-login">Admin</label>
+        <input type="radio" id="user-login" name="login-type" value="user">
+        <label for="user-login">User</label>
+      </div>
+      <div class="txt_field">
+        <input type="text" id="username" name="username" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" id="password" name="password" required>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass"></div>
+      <input type="submit" value="Login" />
+
+      <div class="signup_link">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const loginType = document.querySelector('input[name="login-type"]:checked').value;
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const adminCredentials = { username: "admin", password: "adminPassword" };
+      const userCredentials = { username: "user", password: "userPassword" };
+
+      if (loginType === "admin" && username === adminCredentials.username && password === adminCredentials.password) {
+        alert("Admin login successful!");
+        window.location.href = "./upload.jsp";
+      } else if (loginType === "user" && username === userCredentials.username && password === userCredentials.password) {
+        alert("User login successful!");
+        window.location.href = "./semester1.html"; // If you have a separate dashboard for users
+      } else {
+        alert("Invalid credentials. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
